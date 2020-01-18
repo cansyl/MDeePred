@@ -1,11 +1,8 @@
-# MBAPred
-Multi-Channel Deep Chemogenomic Modeling of Receptor-Ligand Binding Affinity Prediction for Drug Discovery
-
 # MBAPred: Multi-Channel Deep Chemogenomic Modeling of Receptor-Ligand Binding Affinity Prediction for Drug Discovery
 
-![alt text](https://github.com/cansyl/MBAPred/blob/master/MBAPred_Figure.png)
+![alt text](./mbapred_network_structure_figure.png)
 
-## Descriptions of folders and files in the DEEPScreen repository
+## Descriptions of folders and files in the MBAPred repository
 
 
 
