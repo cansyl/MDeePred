@@ -1,6 +1,6 @@
 # MDeePred: Multi-Channel Deep Chemogenomic Modeling of Receptor-Ligand Binding Affinity Prediction for Drug Discovery
 
-![alt text](./mbapred_network_structure_figure.png)
+![alt text](./figures/mdeepred_network_structure_figure.png)
 
 ## Protein Representation
 
