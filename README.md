@@ -2,6 +2,9 @@
 
 ![alt text](./mbapred_network_structure_figure.png)
 
+## Protein Representation
+
+
 ## Descriptions of folders and files in the MBAPred repository
 
 
