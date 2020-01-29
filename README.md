@@ -11,8 +11,9 @@
 
 ## Development and Dependencies
 
-
-#### [Sklearn 0.19.2](https://scikit-learn.org/0.19/install.html)
+#### [PyTorch 0.4.1](https://pytorch.org/get-started/previous-versions/)
+#### [Pandas 0.23.4](https://pandas.pydata.org/pandas-docs/version/0.23.4/install.html)
+#### [Sklearn 0.20](https://scikit-learn.org/0.20/install.html)
 #### [Numpy 1.14.5](https://pypi.python.org/pypi/numpy/1.13.3)
 
 
