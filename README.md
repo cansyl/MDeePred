@@ -3,7 +3,7 @@
 ![alt text](./figures/mdeepred_network_structure_figure.png)
 
 ## Protein Representation
-
+![alt text](./figures/encoding_figure_mod.jpg)
 
 ## Descriptions of folders and files in the MBAPred repository
 
