@@ -17,7 +17,7 @@
 #### [Numpy 1.14.5](https://pypi.python.org/pypi/numpy/1.13.3)
 
 
-## How to run pre-trained ready-to-use MDeePred models to generate DTI predictions
+## How to run pre-trained ready-to-use MDeePred models for binding affinity predictions
 
 **Output of the script:**
 
