@@ -7,7 +7,10 @@
 
 ## Descriptions of folders and files in the MDeePred repository
 
+* **bin** folder includes the source code of DEEPScreen.
 
+* **training_files** folder contains various traininig/test datasets mostly formatted for observational purposes and for employment in future studies
+    * **Davis** contains,
 
 ## Development and Dependencies
 
