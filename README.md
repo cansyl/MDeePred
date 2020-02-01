@@ -7,7 +7,7 @@
 
 ## Descriptions of folders and files in the MDeePred repository
 
-* **bin** folder includes the source code of DEEPScreen.
+* **bin** folder includes the source code of MDeePred.
 
 * **training_files** folder contains various traininig/test datasets mostly formatted for observational purposes and for employment in future studies
     * **Davis** contains training data points, features, data splits for Davis dataset based on Setting-1. **compound_feature_vectors/ecfp4_normalized.tsv** includes ecfp4 features of ligands. **dti_datasets/comp_targ_affinity.csv** is a csv file where each line is formatted as <compound_id>,<target_id>,<bioactivity_value>. **helper_files** includes smiles strings and fasta files of ligands and proteins, respectively. **target_feature_vectors** is for storing target feature vectors which can be downloaded from the following link.
