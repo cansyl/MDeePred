@@ -36,16 +36,38 @@
 
 
 ## How to re-produce performance comparison results for MDeePred and other methods 
+#### Explanation of Parameters
+**--chln**: number of neurons in compound hidden layers (default: 1024_1024)
 
+**--tlnaf**: number of neurons after flattening target conv layers (default: 256)
+
+**--lhln**: number of neurons in last two hidden layers before output layer (default: 1024_1024)
+
+**--lr**:learning rate (default: 0.0001)
+
+**--bs**: batch size (default: 32)
+**--td**: the name of the training dataset (default: Davis)
+
+**--cf**: compound features separated by underscore character (default: ecfp4)
+
+**--tf**: target features separated by underscore character (default: sequencematrix500_ZHAC000103LEQ500_GRAR740104LEQ500_SIMK990101LEQ500_blosum62LEQ500)
+
+**--setting**: Determines whether to perform  5-fold XV (setting-1) or train-validation-test (setting 2) (default:setting1)
+
+**--dropout**: dropout rate (default: 0.25)
+
+**--env**: the name of the experiment (default: my_experiment)
+
+#### For Davis Dataset
 ```
 python main_training.py --chln 1024_1024 --tlnaf 256 --lhln 1024_1024 --lr 0.0001 --bs 32 --td Davis --cf ecfp4 --tf sequencematrix500_ZHAC000103LEQ500_GRAR740104LEQ500_SIMK990101LEQ500_blosum62LEQ500 --setting 1 --dropout 0.1 --en davis_dataset_retraining
 ```
-
+#### For Filtered Davis Dataset
 ```
 python main_training.py --chln 1024_1024 --tlnaf 128 --lhln 1024_512 --lr 0.0001 --bs 32 --td Davis_Filtered --cf ecfp4 --tf sequencematrix500_ZHAC000103LEQ500_GRAR740104LEQ500_SIMK990101LEQ500_blosum62LEQ500  --setting 1 --dropout 0.1 --en davis_filtered_dataset_retraining
 ```
 
-
+#### For PDBBind Refined Dataset
 ```
 python main_training.py --chln 1024_1024 --tlnaf 128 --lhln 1024_512 --lr 0.0001 --bs 32 --td Davis_Filtered --cf ecfp4 --tf sequencematrix500_ZHAC000103LEQ500_GRAR740104LEQ500_SIMK990101LEQ500_blosum62LEQ500  --setting 2 --dropout 0.25 --en pdbbind_refined_dataset_retraining
 ```
