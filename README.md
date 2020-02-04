@@ -23,12 +23,11 @@
 #### [Numpy 1.14.5](https://pypi.python.org/pypi/numpy/1.13.3)
 
 
-## How to run pre-trained ready-to-use MDeePred models for binding affinity predictions
-
-**Output of the script:**
-
-
 ## How to re-produce performance comparison results for MDeePred and other methods 
+* Clone the Git Repository
+* Download the target matrices
+* Run the following commands for each category
+
 #### Explanation of Parameters
 **--chln**: number of neurons in compound hidden layers (default: 1024_1024)
 
