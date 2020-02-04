@@ -28,13 +28,6 @@
 **Output of the script:**
 
 
-## How to train a model
-
-**Output of the script:**
-
-
-
-
 ## How to re-produce performance comparison results for MDeePred and other methods 
 #### Explanation of Parameters
 **--chln**: number of neurons in compound hidden layers (default: 1024_1024)
