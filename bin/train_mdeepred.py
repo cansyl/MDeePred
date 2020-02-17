@@ -14,8 +14,8 @@ from data_processing import get_cnn_test_val_folds_train_data_loader, get_cnn_tr
 warnings.filterwarnings(action='ignore')
 
 cwd = os.getcwd()
-project_file_path = "{}PyTorch".format(cwd.split("PyTorch")[0])
-
+# project_file_path = "{}PyTorch".format(cwd.split("PyTorch")[0])
+training_files_path = "{}MDeePred/training_files".format(cwd.split("MDeePred")[0])
 n_epoch = 100
 num_of_folds = 5
 
@@ -38,8 +38,8 @@ def get_model(model_name, tar_feature_list, num_of_com_features, tar_num_of_last
 
 def get_scores(labels, predictions, validation_test, total_training_loss, total_validation_test_loss, epoch, fold_epoch_results, fold=None, print_scores=False):
 
-    score_dict = {"rm2": None, "CI (DEEPDTA)": None, "MSE": None, "Pearson": None,
-                  "Spearman": None, "CI (Challenge)": None, "Average AUC": None,
+    score_dict = {"rm2": None, "CI": None, "MSE": None, "Pearson": None,
+                  "Spearman": None, "Average AUC": None,
                   "Precision 10uM": None, "Recall 10uM": None, "F1-Score 10uM": None, "Accuracy 10uM": None, "MCC 10uM": None,
                   "Precision 1uM": None, "Recall 1uM": None, "F1-Score 1uM": None, "Accuracy 1uM": None, "MCC 1uM": None,
                   "Precision 100nM": None, "Recall 100nM": None, "F1-Score 100nM": None, "Accuracy 100nM": None, "MCC 100nM": None,
@@ -48,13 +48,12 @@ def get_scores(labels, predictions, validation_test, total_training_loss, total_
 
     score_dict["rm2"] = get_rm2(np.asarray(labels), np.asarray(
         predictions))
-    score_dict["CI (DEEPDTA)"] = get_cindex(np.asarray(labels), np.asarray(
+    score_dict["CI"] = get_cindex(np.asarray(labels), np.asarray(
         predictions))
     score_dict["MSE"] = mse(np.asarray(labels), np.asarray(
         predictions))
     score_dict["Pearson"] = pearson(np.asarray(labels), np.asarray(predictions))
     score_dict["Spearman"] = spearman(np.asarray(labels), np.asarray(predictions))
-    score_dict["CI (Challenge)"] = ci(np.asarray(labels), np.asarray(predictions))
     score_dict["Average AUC"] = average_AUC(np.asarray(labels), np.asarray(predictions))
 
     prec_rec_f1_acc_mcc_threshold_dict = prec_rec_f1_acc_mcc(np.asarray(labels), np.asarray(predictions))
@@ -101,7 +100,7 @@ def five_fold_training(training_dataset, comp_feature_list, tar_feature_list, co
                         shell=True)
 
     result_fl = open(
-        "{}/result_files/{}/{}.txt".format(project_file_path, experiment_name,  "-".join(arguments)), "w")
+        "{}/result_files/{}/performance_results_{}.txt".format(project_file_path, experiment_name,  "-".join(arguments)), "w")
     prediction_fl = open(
         "{}/result_files/{}/predictions_{}.txt".format(project_file_path, experiment_name, "-".join(arguments)), "w")
 
@@ -384,10 +383,9 @@ def train_val_test_training(training_dataset, comp_feature_list, tar_feature_lis
                    total_test_loss, epoch, test_epoch_results)
 
         if test_scores_dict["MSE"] < best_performance_dict["MSE"]:
-            print("OLD:", best_performance_dict)
             best_performance_dict = test_scores_dict
             best_predictions = str_test_predictions
-            print("NEW:", best_performance_dict)
+
 
         if epoch == n_epoch - 1:
             result_fl.write("FOLD : {}\n".format(fold + 1))
