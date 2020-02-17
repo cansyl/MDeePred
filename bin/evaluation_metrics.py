@@ -113,48 +113,6 @@ def spearman(y,f):
     return rs
 
 
-def ci(y,f):
-    """
-    Task:    To compute concordance index (CI)
-
-    Input:   y      Vector with original labels (pKd [M])
-             f      Vector with predicted labels (pKd [M])
-
-    Output:  ci     CI
-
-    References:
-    [1] Tapio Pahikkala, Antti Airola, Sami Pietila, Sushil Shakyawar,
-    Agnieszka Szwajda, JingTang and Tero Aittokallio.
-    Toward more realistic drug-target interaction predictions.
-    Briefings in Bioinformatics, 16, pages 325-337, 2014.
-    """
-
-    ind = np.argsort(y)
-    y = y[ind]
-    f = f[ind]
-
-    i = len(y)-1
-    j = i-1
-    z = 0.0
-    S = 0.0
-
-    while i > 0:
-        while j >= 0:
-            if y[i] > y[j]:
-                z = z+1
-                u = f[i] - f[j]
-                if u > 0:
-                    S = S + 1
-                elif u == 0:
-                    S = S + 0.5
-            j = j - 1
-        i = i - 1
-        j = i-1
-
-    ci = S/z
-
-    return ci
-
 
 def prec_rec_f1_acc_mcc(y,f):
     """
@@ -222,8 +180,8 @@ def average_AUC(y,f):
 
 
 def get_list_of_scores():
-    score_list = ["rm2", "CI (DEEPDTA)", "MSE", "Pearson", "Spearman",
-                  "CI (Challenge)", "Average AUC",
+    score_list = ["rm2", "CI", "MSE", "Pearson", "Spearman",
+                  "Average AUC",
                   "Precision 10uM", "Recall 10uM", "F1-Score 10uM", "Accuracy 10uM", "MCC 10uM",
                   "Precision 1uM", "Recall 1uM", "F1-Score 1uM", "Accuracy 1uM", "MCC 1uM",
                   "Precision 100nM", "Recall 100nM", "F1-Score 100nM", "Accuracy 100nM", "MCC 100nM",
@@ -240,10 +198,9 @@ def get_validation_test_metric_list_of_scores():
     # print(validation_test_list)
     return validation_test_metric_list
 
-
 def get_scores_generic(labels, predictions, validation_test, single_line_print=False):
-    score_dict = {"rm2": None, "CI (DEEPDTA)": None, "MSE": None, "RMSE": None, "Pearson": None,
-                  "Spearman": None, "CI (Challenge)": None, "Average AUC": None,
+    score_dict = {"rm2": None, "CI": None, "MSE": None, "Pearson": None,
+                  "Spearman": None,  "Average AUC": None,
                   "Precision 10uM": None, "Recall 10uM": None, "F1-Score 10uM": None, "Accuracy 10uM": None,
                   "MCC 10uM": None,
                   "Precision 1uM": None, "Recall 1uM": None, "F1-Score 1uM": None, "Accuracy 1uM": None,
@@ -256,15 +213,12 @@ def get_scores_generic(labels, predictions, validation_test, single_line_print=F
 
     score_dict["rm2"] = get_rm2(np.asarray(labels), np.asarray(
         predictions))
-    score_dict["CI (DEEPDTA)"] = get_cindex(np.asarray(labels), np.asarray(
+    score_dict["CI"] = get_cindex(np.asarray(labels), np.asarray(
         predictions))
     score_dict["MSE"] = mse(np.asarray(labels), np.asarray(
         predictions))
-    score_dict["RMSE"] = rmse(np.asarray(labels), np.asarray(
-        predictions))
     score_dict["Pearson"] = pearson(np.asarray(labels), np.asarray(predictions))
     score_dict["Spearman"] = spearman(np.asarray(labels), np.asarray(predictions))
-    score_dict["CI (Challenge)"] = ci(np.asarray(labels), np.asarray(predictions))
     score_dict["Average AUC"] = average_AUC(np.asarray(labels), np.asarray(predictions))
 
     prec_rec_f1_acc_mcc_threshold_dict = prec_rec_f1_acc_mcc(np.asarray(labels), np.asarray(predictions))
