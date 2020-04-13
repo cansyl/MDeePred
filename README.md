@@ -52,27 +52,27 @@
 
 **--dropout**: dropout rate (default: 0.1)
 
-**--env**: the name of the experiment (default: my_experiment)
+**--epoch**: number of epochs (default: 200)
+
+**--en**: the name of the experiment (default: my_experiment)
 
 #### For Davis Dataset
 ```
-python main_training.py --chln 1024_1024 --tlnaf 256 --lhln 1024_1024 --lr 0.0001 --bs 32 --td Davis --cf ecfp4 --tf sequencematrix500_ZHAC000103LEQ500_GRAR740104LEQ500_SIMK990101LEQ500_blosum62LEQ500 --setting 1 --dropout 0.1 --en davis_dataset_retraining
+python main_training.py --chln 1024_1024 --tlnaf 256 --lhln 1024_1024 --lr 0.0001 --bs 32 --td Davis --cf ecfp4 --tf sequencematrix500_ZHAC000103LEQ500_GRAR740104LEQ500_SIMK990101LEQ500_blosum62LEQ500 --setting 1 --dropout 0.1 --epoch 200 --en davis_dataset_retraining
 ```
 #### For Filtered Davis Dataset
 ```
-python main_training.py --chln 1024_1024 --tlnaf 128 --lhln 1024_512 --lr 0.0001 --bs 32 --td Davis_Filtered --cf ecfp4 --tf sequencematrix500_ZHAC000103LEQ500_GRAR740104LEQ500_SIMK990101LEQ500_blosum62LEQ500  --setting 1 --dropout 0.1 --en davis_filtered_dataset_retraining
+python main_training.py --chln 1024_1024 --tlnaf 128 --lhln 1024_512 --lr 0.0001 --bs 32 --td Davis_Filtered --cf ecfp4 --tf sequencematrix500_ZHAC000103LEQ500_GRAR740104LEQ500_SIMK990101LEQ500_blosum62LEQ500  --setting 1 --dropout 0.1 --epoch 200 --en davis_filtered_dataset_retraining
 ```
 
 #### For PDBBind Refined Dataset
 ```
-python main_training.py --chln 1024_1024 --tlnaf 128 --lhln 1024_512 --lr 0.0001 --bs 32 --td Davis_Filtered --cf ecfp4 --tf sequencematrix500_ZHAC000103LEQ500_GRAR740104LEQ500_SIMK990101LEQ500_blosum62LEQ500  --setting 2 --dropout 0.25 --en pdbbind_refined_dataset_retraining
+python main_training.py --chln 1024_1024 --tlnaf 128 --lhln 1024_512 --lr 0.0001 --bs 32 --td Davis_Filtered --cf ecfp4 --tf sequencematrix500_ZHAC000103LEQ500_GRAR740104LEQ500_SIMK990101LEQ500_blosum62LEQ500  --setting 2 --dropout 0.25 --epoch 200 --en pdbbind_refined_dataset_retraining
 ```
 #### Output of the scripts
 **main_training.py** creates a folder under named **experiment_name** (given as argument **--en**) under **result_files** folder. Two files are created under **results_files/<experiment_name>**: **predictions.txt** contains predictions for independent test dataset. The other one is named as **performance_results.txt** which contains the best performance results for each fold (if setting-1 is chosen) or for the test dataset (if setting-2 is chosen). Sample output files for Davis dataset is given under **results_files/davis_dataset_my_experiment**.
 #### Pre-trained Kinase Model
 PyTorch state dictionary for pretrained kinase model is available in [here](https://www.dropbox.com/preview/CanSyL%20In-silico/MDeePred/trained_models/kinome_state_dict.pth?role=work)
-## Performance Results
-![alt text](./figures/performance_results.png)
 ## License
 
     Copyright (C) 2019 CanSyL
