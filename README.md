@@ -75,7 +75,7 @@ python main_training.py --chln 1024_1024 --tlnaf 128 --lhln 1024_512 --lr 0.0001
 PyTorch state dictionary for pretrained kinase model is available in [here](https://www.dropbox.com/preview/CanSyL%20In-silico/MDeePred/trained_models/kinome_state_dict.pth?role=work)
 ## License
 
-    Copyright (C) 2019 CanSyL
+    Copyright (C) 2020 CanSyL
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
