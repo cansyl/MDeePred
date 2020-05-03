@@ -347,3 +347,24 @@ class CompFCNNTarCNNModule2Layers(nn.Module):
             y_pred = self.softmax(self.output(out_combined))
 
         return y_pred
+
+def get_model(model_name, tar_feature_list, num_of_com_features, tar_num_of_last_neurons, comp_hidden_first,
+              comp_hidden_second, fc1, fc2, dropout):
+    model = None
+    if model_name == "CompFCNNTarCNNModuleInception":
+        model = CompFCNNTarCNNModuleInception(tar_feature_list, num_of_com_features, tar_num_of_last_neurons,
+                                              comp_hidden_first, comp_hidden_second,
+                                              fc1, fc2, dropout)
+    elif model_name == "CompFCNNTarCNN4Layers":
+        model = CompFCNNTarCNN4Layers(tar_feature_list, num_of_com_features, tar_num_of_last_neurons, comp_hidden_first,
+                                      comp_hidden_second,
+                                      fc1, fc2, dropout)
+    elif model_name == "CompFCNNTarCNNModule2Layers":
+        model = CompFCNNTarCNNModule2Layers(tar_feature_list, num_of_com_features, tar_num_of_last_neurons,
+                                            comp_hidden_first, comp_hidden_second,
+                                            fc1, fc2, dropout)
+    elif model_name == "CompFCNNTarCNN4LayersStride":
+        model = CompFCNNTarCNN4LayersStride(tar_feature_list, num_of_com_features, tar_num_of_last_neurons,
+                                            comp_hidden_first, comp_hidden_second,
+                                            fc1, fc2, dropout)
+    return model

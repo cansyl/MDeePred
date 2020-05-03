@@ -178,10 +178,38 @@ def average_AUC(y,f):
 
     return avAUC
 
+def average_AUPRC(y,f):
+
+    """
+    Task:    To compute average area under the ROC curves (AUC) given ten
+             interaction threshold values from the pKd interval [6 M, 8 M]
+             to binarize pKd's into true class labels.
+
+    Input:   y      Vector with original labels (pKd [M])
+             f      Vector with predicted labels (pKd [M])
+
+    Output:  avAUC   average AUC
+
+    """
+
+    thr = np.linspace(6,8,10)
+    auc = np.empty(np.shape(thr)); auc[:] = np.nan
+
+    for i in range(len(thr)):
+        y_binary = copy.deepcopy(y)
+        y_binary = preprocessing.binarize(y_binary.reshape(1,-1), threshold=thr[i], copy=False)[0]
+        precision, recall, thresholds = metrics.precision_recall_curve(y_binary, f, pos_label=1)
+        auc[i] = metrics.auc(recall, precision)
+
+    avAUC = np.mean(auc)
+
+    return avAUC
+
+
 
 def get_list_of_scores():
     score_list = ["rm2", "CI", "MSE", "Pearson", "Spearman",
-                  "Average AUC",
+                  "Average AUC", "Average AUPRC",
                   "Precision 10uM", "Recall 10uM", "F1-Score 10uM", "Accuracy 10uM", "MCC 10uM",
                   "Precision 1uM", "Recall 1uM", "F1-Score 1uM", "Accuracy 1uM", "MCC 1uM",
                   "Precision 100nM", "Recall 100nM", "F1-Score 100nM", "Accuracy 100nM", "MCC 100nM",
@@ -198,17 +226,14 @@ def get_validation_test_metric_list_of_scores():
     # print(validation_test_list)
     return validation_test_metric_list
 
-def get_scores_generic(labels, predictions, validation_test, single_line_print=False):
+def get_scores_generic(labels, predictions, validation_test, print_scores=False):
+
     score_dict = {"rm2": None, "CI": None, "MSE": None, "Pearson": None,
-                  "Spearman": None,  "Average AUC": None,
-                  "Precision 10uM": None, "Recall 10uM": None, "F1-Score 10uM": None, "Accuracy 10uM": None,
-                  "MCC 10uM": None,
-                  "Precision 1uM": None, "Recall 1uM": None, "F1-Score 1uM": None, "Accuracy 1uM": None,
-                  "MCC 1uM": None,
-                  "Precision 100nM": None, "Recall 100nM": None, "F1-Score 100nM": None, "Accuracy 100nM": None,
-                  "MCC 100nM": None,
-                  "Precision 30nM": None, "Recall 30nM": None, "F1-Score 30nM": None, "Accuracy 30nM": None,
-                  "MCC 30nM": None, }
+                  "Spearman": None, "Average AUC": None, "Average AUPRC":None,
+                  "Precision 10uM": None, "Recall 10uM": None, "F1-Score 10uM": None, "Accuracy 10uM": None, "MCC 10uM": None,
+                  "Precision 1uM": None, "Recall 1uM": None, "F1-Score 1uM": None, "Accuracy 1uM": None, "MCC 1uM": None,
+                  "Precision 100nM": None, "Recall 100nM": None, "F1-Score 100nM": None, "Accuracy 100nM": None, "MCC 100nM": None,
+                  "Precision 30nM": None, "Recall 30nM": None, "F1-Score 30nM": None, "Accuracy 30nM": None, "MCC 30nM": None,}
     score_list = get_list_of_scores()
 
     score_dict["rm2"] = get_rm2(np.asarray(labels), np.asarray(
@@ -220,19 +245,51 @@ def get_scores_generic(labels, predictions, validation_test, single_line_print=F
     score_dict["Pearson"] = pearson(np.asarray(labels), np.asarray(predictions))
     score_dict["Spearman"] = spearman(np.asarray(labels), np.asarray(predictions))
     score_dict["Average AUC"] = average_AUC(np.asarray(labels), np.asarray(predictions))
+    score_dict["Average AUPRC"] = average_AUPRC(np.asarray(labels), np.asarray(predictions))
 
     prec_rec_f1_acc_mcc_threshold_dict = prec_rec_f1_acc_mcc(np.asarray(labels), np.asarray(predictions))
     for key in prec_rec_f1_acc_mcc_threshold_dict.keys():
         score_dict[key] = prec_rec_f1_acc_mcc_threshold_dict[key]
 
-
-    str_single_line_performances = ""
-    if single_line_print:
-        print("\t".join(score_list))
-        for scr in score_list:
-            str_single_line_performances += "{}\t".format(score_dict[scr])
-        print(str_single_line_performances)
-    else:
+    if print_scores:
         for scr in score_list:
             print("{} {}:\t{}".format(validation_test, scr, score_dict[scr]))
+    return score_dict
 
+def get_scores(labels, predictions, validation_test, total_training_loss, total_validation_test_loss, epoch, fold_epoch_results, print_scores=False, fold=None):
+
+    score_dict = {"rm2": None, "CI": None, "MSE": None, "Pearson": None,
+                  "Spearman": None, "Average AUC": None, "Average AUPRC":None,
+                  "Precision 10uM": None, "Recall 10uM": None, "F1-Score 10uM": None, "Accuracy 10uM": None, "MCC 10uM": None,
+                  "Precision 1uM": None, "Recall 1uM": None, "F1-Score 1uM": None, "Accuracy 1uM": None, "MCC 1uM": None,
+                  "Precision 100nM": None, "Recall 100nM": None, "F1-Score 100nM": None, "Accuracy 100nM": None, "MCC 100nM": None,
+                  "Precision 30nM": None, "Recall 30nM": None, "F1-Score 30nM": None, "Accuracy 30nM": None, "MCC 30nM": None,}
+    score_list = get_list_of_scores()
+
+    score_dict["rm2"] = get_rm2(np.asarray(labels), np.asarray(
+        predictions))
+    score_dict["CI"] = get_cindex(np.asarray(labels), np.asarray(
+        predictions))
+    score_dict["MSE"] = mse(np.asarray(labels), np.asarray(
+        predictions))
+    score_dict["Pearson"] = pearson(np.asarray(labels), np.asarray(predictions))
+    score_dict["Spearman"] = spearman(np.asarray(labels), np.asarray(predictions))
+    score_dict["Average AUC"] = average_AUC(np.asarray(labels), np.asarray(predictions))
+    score_dict["Average AUPRC"] = average_AUPRC(np.asarray(labels), np.asarray(predictions))
+
+    prec_rec_f1_acc_mcc_threshold_dict = prec_rec_f1_acc_mcc(np.asarray(labels), np.asarray(predictions))
+    for key in prec_rec_f1_acc_mcc_threshold_dict.keys():
+        score_dict[key] = prec_rec_f1_acc_mcc_threshold_dict[key]
+
+    if print_scores:
+        if fold!=None:
+            fold_epoch_results[-1].append(score_dict)
+            print("Fold:{}\tEpoch:{}\tTraining Loss:{}\t{} Loss:{}".format(fold + 1, epoch, total_training_loss,
+                                                                           validation_test, total_validation_test_loss))
+        else:
+            fold_epoch_results.append(score_dict)
+            print("Epoch:{}\tTraining Loss:{}\t{} Loss:{}".format(epoch, total_training_loss, validation_test,
+                                                                  total_validation_test_loss))
+        for scr in score_list:
+            print("{} {}:\t{}".format(validation_test, scr, score_dict[scr]))
+    return score_dict

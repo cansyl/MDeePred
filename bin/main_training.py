@@ -65,8 +65,8 @@ parser.add_argument(
     '--setting',
     type=int,
     default=1,
-    metavar='TVT',
-    help='Determines if data is divided into train-validation-test (default: 1)')
+    metavar='set',
+    help='Determines the setting (1: n_fold, 2:train_val_test) (default: 1)')
 
 parser.add_argument(
     '--dropout',
@@ -82,13 +82,37 @@ parser.add_argument(
     metavar='EN',
     help='the name of the experiment (default: my_experiment)')
 
-
 parser.add_argument(
     '--model',
     type=str,
     default="CompFCNNTarCNNModuleInception",
     metavar='mn',
     help='model name (default: CompFCNNTarCNNModuleInception)')
+parser.add_argument(
+    '--epoch',
+    type=int,
+    default=200,
+    metavar='EPC',
+    help='Number of epochs (default: 200)')
+parser.add_argument(
+    '--fold_num',
+    type=int,
+    default=None,
+    metavar='fn',
+    help='Determines the fold number to train this is for independent fold training (default: None)')
+parser.add_argument(
+    '--train_val_test',
+    type=int,
+    default=1,
+    metavar='TVT',
+    help='Determines if train-test or train_val_test (default: 1)')
+parser.add_argument(
+    '--ext_test_feat_vec',
+    type=str,
+    default=None,
+    metavar='ETFV',
+    help='The name of the external test feature vector file (default: None)')
+
 
 
 
@@ -101,12 +125,16 @@ if __name__ == "__main__":
     if args.setting == 1:
         five_fold_training(args.td, (args.cf).split("_"), (args.tf).split("_"), comp_hidden_layer_neurons,
                            args.tlnaf, last_2_hidden_layer_list[0], last_2_hidden_layer_list[1], args.lr,
-                           args.bs, args.model, args.dropout, args.en)
+                           args.bs, args.model, args.dropout, args.en, args.epoch, args.fold_num, args.ext_test_feat_vec)
 
     # This setting is for both train_validation and test split and time-split
     elif args.setting == 2:
+        print("Setting 2", args.train_val_test)
         train_val_test_training(args.td, (args.cf).split("_"), (args.tf).split("_"), comp_hidden_layer_neurons,
                                 args.tlnaf, last_2_hidden_layer_list[0], last_2_hidden_layer_list[1], args.lr,
-                                args.bs, args.model, args.dropout, args.en)
+                                args.bs, args.model, args.dropout, args.en, args.epoch, args.train_val_test, args.ext_test_feat_vec)
+        # python main_training.py --td kinome --args.setting 2 --cf ecfp4 --tf sequencematrix1000_ZHAC000103LEQ1000_GRAR740104LEQ1000_SIMK990101LEQ1000_blosum62LEQ1000 --chln 1024_1024
+        # --tlnaf 256 --lhln 512_256 --lr 0.0001 --bs 32 --model CompFCNNTarCNNModuleInception --dropout 0.25 --final_kinome --epoch 200 --train_val_test True
+        #
     else:
         pass
