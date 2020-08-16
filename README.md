@@ -72,8 +72,8 @@ python main_training.py --chln 1024_1024 --tlnaf 128 --lhln 1024_512 --lr 0.0001
 #### Output of the scripts
 **main_training.py** creates a folder under named **experiment_name** (given as argument **--en**) under **result_files** folder. Two files are created under **results_files/<experiment_name>**: **predictions.txt** contains predictions for independent test dataset. The other one is named as **performance_results.txt** which contains the best performance results for each fold (if setting-1 is chosen) or for the test dataset (if setting-2 is chosen). Sample output files for Davis dataset is given under **results_files/davis_dataset_my_experiment**.
 #### Pre-trained Models
-* PyTorch state dictionary for pretrained kinase model is available in [here].(https://www.dropbox.com/s/92bmvglk5p5ln1z/pretrained_kinome_model_state_dict.pth?dl=0)
-* PyTorch state dictionary for pretrained GPCR model is available in [here].(https://www.dropbox.com/s/7qsez2s5dthi5qk/pretrained_gpcr_model_state_dict.pth?dl=0)
+* PyTorch state dictionary for pretrained kinase model is available in [here](https://www.dropbox.com/s/92bmvglk5p5ln1z/pretrained_kinome_model_state_dict.pth?dl=0).
+* PyTorch state dictionary for pretrained GPCR model is available in [here](https://www.dropbox.com/s/7qsez2s5dthi5qk/pretrained_gpcr_model_state_dict.pth?dl=0).
 ## License
 
     Copyright (C) 2020 CanSyL
