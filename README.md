@@ -9,7 +9,7 @@ Here, we present a novel protein featurization approach to be used in deep learn
 ## System architecture of MDeePred
 ![alt text](./figures/mdeepred_network_structure_figure.png)
 
-## Protein Representation
+## Protein representation approach
 ![alt text](./figures/Figure1.png)
 
 ## Descriptions of folders and files in the MDeePred repository
