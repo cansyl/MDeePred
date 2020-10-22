@@ -1,5 +1,14 @@
 # MDeePred: Multi-Channel Deep Chemogenomic Modeling of Receptor-Ligand Binding Affinity Prediction for Drug Discovery
 
+**Motivation**
+Identification of interactions between bioactive small molecules and target proteins is crucial for novel drug discovery, drug repurposing and uncovering off-target effects. Due to the tremendous size of the chemical space, experimental bioactivity screening efforts require the aid of computational approaches. Although deep learning models have been successful in predicting bioactive compounds, effective and comprehensive featurization of proteins, to be given as input to deep neural networks, remains a challenge.
+
+**Results**
+Here, we present a novel protein featurization approach to be used in deep learning-based compound-target protein binding affinity prediction. In the proposed method, multiple types of protein features such as sequence, structural, evolutionary and physicochemical properties are incorporated within multiple 2-D vectors, which is then fed to state-of-the-art pairwise input hybrid deep neural networks to predict the real-valued compound-target protein interactions. The method adopts the proteochemometric approach, where both the compound and target protein features are employed at the input level to model their interaction. The whole system is called MDeePred and it is a new method to be used for the purposes of computational drug discovery and repositioning. We evaluated MDeePred on well-known benchmark datasets and compared its performance with the state-of-the-art methods. We also performed in vitro comparative analysis of MDeePred predictions with selected kinase inhibitors’ action on cancer cells. MDeePred is a scalable method with sufficiently high predictive performance. The featurization approach proposed here can also be utilized for other protein-related predictive tasks.
+
+More information can be obtained from [MDeePred journal article](https://doi.org/10.1093/bioinformatics/btaa858)
+
+
 ![alt text](./figures/mdeepred_network_structure_figure.png)
 
 ## Protein Representation
@@ -74,6 +83,13 @@ python main_training.py --chln 1024_1024 --tlnaf 128 --lhln 1024_512 --lr 0.0001
 #### Pre-trained Models
 * PyTorch state dictionary for pretrained kinase model is available in [here](https://www.dropbox.com/s/92bmvglk5p5ln1z/pretrained_kinome_model_state_dict.pth?dl=0).
 * PyTorch state dictionary for pretrained GPCR model is available in [here](https://www.dropbox.com/s/7qsez2s5dthi5qk/pretrained_gpcr_model_state_dict.pth?dl=0).
+
+<br></br>
+If you use MDeePred please consider citing:
+<br></br>
+Rifaioglu, A. S., Cetin Atalay, R., Cansen Kahraman, D., Doğan, T., Martin, M., & Atalay, V. (2020). MDeePred: Novel Multi-Channel protein featurization for deep learning based binding affinity prediction in drug discovery. *Bioinformatics*, btaa858 [doi:10.1093/bioinformatics/btaa858].
+
+
 ## License
 
     Copyright (C) 2020 CanSyL
