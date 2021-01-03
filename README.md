@@ -35,6 +35,7 @@ Here, we present a novel protein featurization approach to be used in deep learn
 * Download the target matrices and copy them under **target_feature_vectors** of the corresponding dataset
     * Download target features for Davis and Filtered Davis [here](https://www.dropbox.com/s/74aaln7nzoqfjww/davis_filtered_davis_target_feature_vectors_LEQ500.tar.gz?dl=0)
     * Download target features for PDBBind Refined [here](https://www.dropbox.com/s/0o90ophu8w6fudr/pdbbind_refined_target_feature_vectors_LEQ500.tar.gz?dl=0)
+    * Download target features for Kinome Dataset [here](https://www.dropbox.com/s/0o90ophu8w6fudr/pdbbind_refined_target_feature_vectors_LEQ500.tar.gz?dl=0)
 
 * Run the below commands for each dataset
 
@@ -76,6 +77,12 @@ python main_training.py --chln 1024_1024 --tlnaf 128 --lhln 1024_512 --lr 0.0001
 ```
 python main_training.py --chln 1024_1024 --tlnaf 128 --lhln 1024_512 --lr 0.0001 --bs 32 --td Davis_Filtered --cf ecfp4 --tf sequencematrix500_ZHAC000103LEQ500_GRAR740104LEQ500_SIMK990101LEQ500_blosum62LEQ500  --setting 2 --dropout 0.25 --epoch 200 --en pdbbind_refined_dataset_retraining
 ```
+
+#### For Kinome Dataset
+```
+python main_training.py --chln 1024_1024 --tlnaf 256 --lhln 1024_512 --lr 0.0001 --bs 32 --td Davis_Filtered --cf ecfp4 --tf sequencematrix500_ZHAC000103LEQ500_GRAR740104LEQ500_SIMK990101LEQ500_blosum62LEQ500  --setting 2 --dropout 0.1 --epoch 200 --en kinome_dataset_retraining
+```
+
 #### Output of the scripts
 **main_training.py** creates a folder under named **experiment_name** (given as argument **--en**) under **result_files** folder. Two files are created under **results_files/<experiment_name>**: **predictions.txt** contains predictions for independent test dataset. The other one is named as **performance_results.txt** which contains the best performance results for each fold (if setting-1 is chosen) or for the test dataset (if setting-2 is chosen). Sample output files for Davis dataset is given under **results_files/davis_dataset_my_experiment**.
 #### Pre-trained Models
