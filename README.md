@@ -35,7 +35,7 @@ Here, we present a novel protein featurization approach to be used in deep learn
 * Download the target matrices and copy them under **target_feature_vectors** of the corresponding dataset
     * Download target features for Davis and Filtered Davis [here](https://www.dropbox.com/s/74aaln7nzoqfjww/davis_filtered_davis_target_feature_vectors_LEQ500.tar.gz?dl=0)
     * Download target features for PDBBind Refined [here](https://www.dropbox.com/s/0o90ophu8w6fudr/pdbbind_refined_target_feature_vectors_LEQ500.tar.gz?dl=0)
-    * Download target features for Kinome Dataset [here](https://www.dropbox.com/s/r4fl3csm93o2khs/kinome_target_feature_vectors_LEQ1000.tar.gz?dl=0)
+    * Download target features for Kinome Dataset [here](https://www.dropbox.com/s/14l647ibeomfwgm/kinome_target_feature_vectors_LEQ1000.zip?dl=0)
 
 * Run the below commands for each dataset
 
